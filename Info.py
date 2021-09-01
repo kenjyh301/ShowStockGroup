@@ -32,6 +32,7 @@ class Info():
                 #2 element value and percent in pricechange
                 priceChange= soup.find('div',id='stockchange').find_all('span')
                 changeValue= priceChange[0].text
+                if changeValue=='':changeValue='0'
                 changePercent= priceChange[1].text
                 color= priceChange[0]['class'][0]
                 listPrice.append(price)
@@ -52,16 +53,22 @@ class Info():
         for index,row in self.infoDf.iterrows():
             normalColor= Style.RESET_ALL
             if 'green' in row['Color']:
-                color= Back.GREEN
+                color= Back.GREEN+Fore.BLACK
+            elif 'orange' in row['Color']:
+                color= Back.LIGHTWHITE_EX+Fore.BLACK
+            elif 'purple' in row['Color']:
+                color= Back.MAGENTA+Fore.BLACK
+            elif 'red' in row['Color']:
+                color= Back.RED+Fore.BLACK
             else:
-                color= Back.RED
-            print(normalColor,'{:>8}'.format(row['Name']+'  '),end='')
+                color= Back.CYAN+Fore.BLACK
+            print(normalColor,'{:>6}'.format(row['Name']+'  '),end='')
             print(normalColor,'\t',end='')
-            print(color,'{:>8}'.format(row['Price']+'  '),end='')
+            print(color,'{:>10}'.format(row['Price']+'  '),end='')
             print(normalColor,'\t',end='')
-            print(color,'{:>8}'.format(row['Change']+'  '),end='')
+            print(color,'{:>10}'.format(row['Change']+'  '),end='')
             print(normalColor,'\t',end='')
-            print(color,'{:>8}'.format(row['Percent']+'  '),end='')
+            print(color,'{:>10}'.format(row['Percent']+'  '),end='')
             print(normalColor)
         print(Style.RESET_ALL)
         

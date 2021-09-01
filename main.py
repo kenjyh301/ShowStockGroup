@@ -17,6 +17,7 @@ def ShowThreadFunc(info):
 
 logging.basicConfig(level=logging.WARN)
 argv= sys.argv
+# group= ManageGroup('CurrentHold.csv')
 group= ManageGroup(argv[1])
 info= Info(group.GetCodes())
 x= threading.Thread(target=ShowThreadFunc,args=(info,))
