@@ -1,10 +1,13 @@
-from MangaeGroup import ManageGroup
+from ManageGroup import ManageGroup
 from Info import Info
 import logging
 import threading
 import time
 import os
-import sys
+
+# import sys
+
+
 
 def ShowThreadFunc(info):
     while(True):
@@ -14,14 +17,18 @@ def ShowThreadFunc(info):
             info.ShowInfo()
         time.sleep(1)
 
+if __name__=="__main__":
+    logging.basicConfig(level=logging.WARN)
+    # argv= sys.argv
+    # group= ManageGroup('CurrentHold.csv')
+    groupName= input("Please enter group: ")
+    group= ManageGroup(groupName)
+    info= Info(group.GetCodes())
+    x= threading.Thread(target=ShowThreadFunc,args=(info,))
+    x.start()
+    
 
-logging.basicConfig(level=logging.WARN)
-argv= sys.argv
-# group= ManageGroup('CurrentHold.csv')
-group= ManageGroup(argv[1])
-info= Info(group.GetCodes())
-x= threading.Thread(target=ShowThreadFunc,args=(info,))
-x.start()
+
 
 
 
